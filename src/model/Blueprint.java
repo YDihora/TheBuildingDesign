@@ -1,0 +1,57 @@
+package model;
+
+public class Blueprint {
+	
+	private Floor[] floors;
+	private int nof; // number of floor
+	private int maxNumberOfFloors;
+	
+	
+	
+	public Blueprint(int maxNumberOfFloor) {
+		this.maxNumberOfFloors = maxNumberOfFloor;
+		this.floors = new Floor[maxNumberOfFloor];
+		this.nof=0;
+		
+	}
+	
+	public Blueprint(Blueprint other) {
+		this(other.maxNumberOfFloors);
+		for(int i=0;i<other.nof;i++) {
+			this.floors[i] = new Floor(other.floors[i]); 
+		}
+		this.nof = other.nof;
+		
+	}
+	public void addFloorPlan(Floor f) {
+		this.floors[this.nof]=f;
+		this.nof++;
+	}
+	
+	public Floor[] getFloors() {
+		Floor[] results = new Floor[this.nof];
+		for(int i=0;i<this.nof;i++) {
+			results[i] = new Floor(this.floors[i]); 
+		}
+		
+		
+		return results;
+		
+	}
+	public String toString() {
+		//0.0 percents of building blueprint completed (0 out of 7 floors)
+		double percentage = (this.nof/(double)this.maxNumberOfFloors)*100;
+		String percentageS = String.format("%.1f",percentage);
+		return String.format("%s percents of building blueprint completed (%d out of %d floors)", 
+				percentageS,this.nof,this.maxNumberOfFloors);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
